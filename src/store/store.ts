@@ -15,7 +15,8 @@ export class Store {
   subscribe(fn) {
     this.subscribers = [...this.subscribers, fn];
     this.notify();
-    //unsubscribe as soon as we call the result of subscribe
+    // Unsubscribe as soon as we call the result of subscribe
+    // This returned function is an example of a closure
     return () => {
       this.subscribers = this.subscribers.filter((sub) => sub != fn);
     };
