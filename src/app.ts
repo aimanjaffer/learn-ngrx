@@ -8,7 +8,7 @@ const todoList = document.querySelector(".todos") as HTMLLIElement;
 
 const reducers = {
   // key: string, value: function
-  todos: fromStore.reducer
+  todos: fromStore.reducer,
 };
 const store = new fromStore.Store(reducers);
 
@@ -23,7 +23,7 @@ button.addEventListener(
     const action = {
       type: "ADD_TODO",
       payload: payload,
-    }
+    };
     store.dispatch(action);
     console.log(store.value);
     input.value = "";
