@@ -3,7 +3,7 @@ import { renderTodos } from "./utils";
 
 const input = document.querySelector("input") as HTMLInputElement;
 const button = document.querySelector("button") as HTMLButtonElement;
-const destroy = document.querySelector(".unsubscribe") as HTMLButtonElement;
+const unsubscribeButton = document.querySelector(".unsubscribe") as HTMLButtonElement;
 const todoList = document.querySelector(".todos") as HTMLLIElement;
 
 const reducers = {
@@ -36,7 +36,7 @@ const unsubscribe = store.subscribe((state) => {
 });
 
 // unsubscribe is a function that is returned from store.subscribe()
-destroy.addEventListener("click", unsubscribe, false);
+unsubscribeButton.addEventListener("click", unsubscribe, false);
 
 todoList.addEventListener("click", function (event) {
   const target = event.target as HTMLButtonElement;
