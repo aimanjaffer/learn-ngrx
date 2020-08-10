@@ -1,0 +1,114 @@
+NGRX Store and Effects
+------------------------
+Application State: Any data (server response, User input, router state etc.) thats used in the client-side
+Store is the container for application state
+State is a representation of our application at a given time
+------------------------
+State management library:
+1) To model our app state
+2) Update State when something changes
+3) Read state values
+4) Monitor/Observe changes to state
+---------------------------------------
+Redux Architecture: (3 principles)
+1) Single source of truth:
+-> One state tree inside our store, state lives in a single place
+-> Predictible, maintainable
+-> Server side rendering
+-> Testing and debugging is easier
+2) State is read-only
+-> Cannot mutate a state
+-> Derive properties from a state
+-> Dispatch and action (function) to update a state
+-> Use an immutable update pattern. (Return new data instead of updating)
+3) Pure functions update state
+-> Pure functions are those that do not have side effects
+-> Pure functions are called reducers
+-> Reducers return a new state, state is then rebound to store
+---------------------------------------------------------------
+Single state tree
+Actions
+Reducers
+Store
+One-way data flow
+-----------------
+Single state tree:
+One big JS Object
+Reducers update state tree
+-----------------------
+Example:
+const state = {
+todo: []
+};
+------------------------
+Actions:
+Have Two properties
+-> type: string, describe event
+-> payload: optional data
+------------------------
+Example:
+	const action = {
+		type: 'ADD_TODO',
+		payload: {
+			label: 'Eat pizza',
+			complete: false,
+		}
+	};
+------------------------
+Reducers:
+-> Pure functions
+-> responds to action.type
+-> has access to action.payload
+-> returned object is a representation of new state
+-> this new state is then bound to the store
+----------------------------------------------
+Example:
+function reducer(state, action){
+  switch(action.type){
+    case 'ADD_TODO':{
+	    const todo = action.payload;
+	    const todos = [...state.todos,todo];
+	    return {todos};
+    }
+  }
+  return state;
+}
+----------------------------------------------
+Store:
+-> State container
+-> Components interact with the store
+-> Componetns can dispatch actions to the store
+-> Components subscribe to slices of store/entire store
+-------------------------------------------------------
+One-way data flow:
+-> Component dispatches actions
+-> Actions are sent to the reducers
+-> Reducers update the state
+-> Components are notified when state changes therefore components are updated with new state
+-----------------------------------------------------
+Component -> Action -> Reducer -> State -> Component
+Arrows go in one direction
+-----------------------------------------------------
+Immutable and Mutable Javascript:
+Immutable object: state cannot be modified after creation
+Why should objects be immutable?
+-> Predictability
+-> Makes debugging easier
+-> Change detection
+-> Mutation Tracking: track how mutations are made, allowing you to undo state changes
+-----------------------------------------------------
+Mutable in JS:
+1) Functions
+2) Objects
+3) Arrays
+------------------------
+Immutable in JS:
+1) Strings
+2) Numbers
+-----------------------
+Example: (maintaining immutability in objects, similar for arrays)
+const character = { name: 'Aiman'};
+const updatedCharacter = {...character, role:'Captain'};
+-----------------------
+Build a custom store:
+
