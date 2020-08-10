@@ -31,9 +31,19 @@ button.addEventListener(
   false
 );
 
+const unsubscribe = store.subscribe((state) => {
+  renderTodos(state.todos.data);
+});
+
+// unsubscribe is a function that is returned from store.subscribe()
+destroy.addEventListener("click", unsubscribe, false);
+
 todoList.addEventListener("click", function (event) {
   const target = event.target as HTMLButtonElement;
   if (target.nodeName.toLowerCase() === "button") {
     console.log(target);
   }
 });
+
+//the function passed as a parameter will be called whenever state changes
+store.subscribe((state) => console.log("State Changed:::", state));
